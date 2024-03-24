@@ -1,32 +1,39 @@
 package com.zorrix.onlineShop.controllers;
 
 import com.zorrix.onlineShop.Product;
+import com.zorrix.onlineShop.config.SpringConfig;
 import jakarta.jws.WebParam;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class MainController {
-    Product p1 = new Product(1, "Iphone", "Ipont", 700);
-    Product[] products1 = new Product[]{p1};
-    List<Product> products = new ArrayList<>(List.of(products1));
+    AnnotationConfigApplicationContext context;
+
+    @ModelAttribute
+    private void setContext(){
+        context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    }
 
     @RequestMapping("/home")
     public String goHome(Model model){
         model.addAttribute("product", new Product());
-        model.addAttribute("productList", products);
+        model.addAttribute("productList", context.getBean("productList", ArrayList.class));
 
         return "home";
     }
 
-    @RequestMapping("/product")
-    public String openProduct(@ModelAttribute("product") Model model){
+    @RequestMapping("/product{id}")
+    public String openProduct(Model model, @PathVariable int id){
+        id--;
+        Product product = (Product) context.getBean("productList", ArrayList.class).get(id);
+        model.addAttribute("product", product);
 
         return "product";
     }
