@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="stylesheet" href="<c:url value="/resources/style/style.css"/> ">
+    <link rel="stylesheet" href="<c:url value="/resources/style/style2.css"/> ">
     <title>HOME</title>
 </head>
 <body>
