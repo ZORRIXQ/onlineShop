@@ -57,7 +57,6 @@ public class ProductAddService implements ProductAddRepository {
 
             HibernateUtil.closeSession(session);
             System.out.println("Successfully added productList");
-
         }
     }
 

@@ -2,6 +2,7 @@ package com.zorrix.onlineShop.controllers;
 
 import com.zorrix.onlineShop.Product;
 import com.zorrix.onlineShop.config.SpringConfig;
+import com.zorrix.onlineShop.services.ProductGetService;
 import jakarta.jws.WebParam;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -24,15 +25,16 @@ public class MainController {
     @RequestMapping("/home")
     public String goHome(Model model){
         model.addAttribute("product", new Product());
-        model.addAttribute("productList", context.getBean("productList", ArrayList.class));
+        model.addAttribute("productList", context.getBean("allProducts", ArrayList.class));
 
         return "home";
     }
 
     @RequestMapping("/product{id}")
     public String openProduct(Model model, @PathVariable int id){
-        id--;
-        Product product = (Product) context.getBean("productList", ArrayList.class).get(id);
+        ProductGetService productGet = context.getBean("productGetService", ProductGetService.class);
+        Product product = productGet.getProduct(id);
+
         model.addAttribute("product", product);
 
         return "product";

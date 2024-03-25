@@ -14,13 +14,13 @@
             <a href="home" class="home-btn">Home</a>
         </header>
         <main>
-            <jsp:useBean id="productList" scope="request" type="java.util.List"/>
-            <c:forEach items="${productList}" var="item">
-
+            <jsp:useBean id="allProducts" scope="request" class="java.util.ArrayList"/>
+            ${allProducts.size()}
+            <c:forEach items="${allProducts}" var="item">
                 <form:form action="product${item.id}" method="POST">
                     <div class="product-card">
                         <a href="product${item.id}">
-                            <img src="<c:url value="/resources/images/phone.png"/> " alt="Product 1">
+                            <img src="${item.bytesToimage()}" alt="Product 1">
                             <h2>${item.name}</h2>
                             <p class="price">${item.price}</p>
                             <p class="description">${item.description}   Lorem ipsum dolor sit amet, conwqfwqfqwfsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>

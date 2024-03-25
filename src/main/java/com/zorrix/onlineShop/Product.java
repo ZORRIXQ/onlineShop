@@ -3,11 +3,12 @@ package com.zorrix.onlineShop;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
-@Getter
+@Getter @Setter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,20 +21,16 @@ public class Product {
     private Integer id;
 
     @Column(name = "name", nullable = false)
-    @Setter
     private String name;
 
     @Column(name = "description")
-    @Setter
     private String description;
 
     @Column(name = "price", nullable = false)
-    @Setter
     private int price;
 
     @Lob
     @Column(name = "image")
-    @Setter
     private byte[] image;
 
     public Product(String name, String description, int price, File image) throws IOException {
@@ -42,28 +39,11 @@ public class Product {
         this.price = price;
         FileInputStream fis = new FileInputStream(image);
         this.image = fis.readAllBytes();
-    }
-//
-//    public Product(){
-//        this.id = 0;
-//        this.description = null;
-//        this.name = null;
-//        this.price = 0;
-//    }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public int getPrice() {
-//        return price;
-//    }
+    }
+
+    public Image bytesToimage() throws IOException {
+
+        return ImageIO.read(new ByteArrayInputStream(this.image));
+    }
 }
