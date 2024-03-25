@@ -15,7 +15,7 @@
 
 <main class="product-details">
     <div class="product-image">
-        <img src="${product.bytesToimage()}" alt="Product Image">
+        <img src="${product.imagePath}" alt="Product Image">
     </div>
     <div class="product-info">
         <h2>${product.name}</h2>

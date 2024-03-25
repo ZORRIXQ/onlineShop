@@ -24,7 +24,7 @@ public class ProductAddService implements ProductAddRepository {
         product.setPrice(productToAdd.getPrice());
         System.out.println("Get product: " + product);
 
-        product.setImage(productToAdd.getImage());
+        product.setImagePath(productToAdd.getImagePath());
 
         session.persist(product);
         session.flush();
@@ -48,12 +48,13 @@ public class ProductAddService implements ProductAddRepository {
                 product.setPrice(currentProduct.getPrice());
                 System.out.println("Get product: " + product);
 
-                product.setImage(currentProduct.getImage());
+                product.setImagePath(currentProduct.getImagePath());
 
                 session.persist(product);
                 session.flush();
-                transaction.commit();
+
             }
+            transaction.commit();
 
             HibernateUtil.closeSession(session);
             System.out.println("Successfully added productList");

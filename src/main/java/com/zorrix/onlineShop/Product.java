@@ -10,7 +10,6 @@ import java.io.*;
 
 @Getter @Setter
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
@@ -29,21 +28,15 @@ public class Product {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
+    @Column(name = "imagePath")
+    private String imagePath;
 
-    public Product(String name, String description, int price, File image) throws IOException {
+    public Product(String name, String description, int price, String imagePath) throws IOException {
         this.name = name;
         this.description = description;
         this.price = price;
-        FileInputStream fis = new FileInputStream(image);
-        this.image = fis.readAllBytes();
-
+        this.imagePath = imagePath;
     }
 
-    public Image bytesToimage() throws IOException {
 
-        return ImageIO.read(new ByteArrayInputStream(this.image));
-    }
 }

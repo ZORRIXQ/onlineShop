@@ -3,6 +3,7 @@ package com.zorrix.onlineShop.controllers;
 import com.zorrix.onlineShop.Product;
 import com.zorrix.onlineShop.config.SpringConfig;
 import com.zorrix.onlineShop.services.ProductGetService;
+import jakarta.annotation.PostConstruct;
 import jakarta.jws.WebParam;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -18,6 +19,7 @@ public class MainController {
     AnnotationConfigApplicationContext context;
 
     @ModelAttribute
+//    @PostConstruct
     private void setContext(){
         context = new AnnotationConfigApplicationContext(SpringConfig.class);
     }
@@ -27,7 +29,7 @@ public class MainController {
         model.addAttribute("product", new Product());
 
         model.addAttribute("allProducts", context.getBean("productGetService", ProductGetService.class).getAllProducts());
-
+        context.close();
         return "home";
     }
 
@@ -37,6 +39,7 @@ public class MainController {
         Product product = productGet.getProduct(id);
 
         model.addAttribute("product", product);
+        context.close();
 
         return "product";
     }

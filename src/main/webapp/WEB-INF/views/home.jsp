@@ -15,16 +15,16 @@
         </header>
         <main>
             <c:forEach items="${allProducts}" var="item">
-                <form:form action="product${item.id}" method="POST">
-                    <div class="product-card">
-                        <a href="product${item.id}">
-                            <img src="${item.bytesToimage()}" alt="Product 1">
-                            <h2>${item.name}</h2>
-                            <p class="price">${item.price}</p>
-                            <p class="description">${item.description}   Lorem ipsum dolor sit amet, conwqfwqfqwfsectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </a>
-                    </div>
-                </form:form>
+                <div class="product-card">
+                    <form:form action="product${item.id}" method="POST">
+                            <a href="product${item.id}">
+                                <img src="${item.imagePath}" alt="Product 1">
+                                <h2 class="itemName">${item.name}</h2>
+                                <H1 class="price">${item.price} $</H1>
+<%--                                <p class="description">${item.description}</p>--%>
+                            </a>
+                    </form:form>
+                </div>
             </c:forEach>
         </main>
 
