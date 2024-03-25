@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -25,13 +26,4 @@ public class SpringConfig {
 
         return builder.build();
     }
-    @Bean
-    @Scope("singleton")
-    public List<Product> allProducts(){
-        ProductGetService productGet = new ProductGetService();
-        System.out.println("\nallProducts: " + productGet.getAllProducts().size() + "\n");
-
-        return productGet.getAllProducts();
-    }
-
 }

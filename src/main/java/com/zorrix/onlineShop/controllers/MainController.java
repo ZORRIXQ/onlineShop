@@ -25,7 +25,8 @@ public class MainController {
     @RequestMapping("/home")
     public String goHome(Model model){
         model.addAttribute("product", new Product());
-        model.addAttribute("productList", context.getBean("allProducts", ArrayList.class));
+
+        model.addAttribute("allProducts", context.getBean("productGetService", ProductGetService.class).getAllProducts());
 
         return "home";
     }

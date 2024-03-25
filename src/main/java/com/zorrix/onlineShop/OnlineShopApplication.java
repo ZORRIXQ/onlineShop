@@ -25,11 +25,9 @@ public class OnlineShopApplication extends SpringBootServletInitializer {
 		AnnotationConfigApplicationContext context =
 			new AnnotationConfigApplicationContext(SpringConfig.class);
 
-		ProductGetService productGet = context.getBean("productGetService", ProductGetService.class);
+		System.out.println(context.getBean("productGetService", ProductGetService.class).getAllProducts().size() + " - list size");
 
-		System.out.println(context.getBean("allProducts", ArrayList.class).size());
-
-//        SpringApplication.run(OnlineShopApplication.class, args);
+        SpringApplication.run(OnlineShopApplication.class, args);
 	}
 
 }

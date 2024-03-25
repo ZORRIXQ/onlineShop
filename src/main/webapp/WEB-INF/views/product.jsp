@@ -4,7 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="<c:url value="/resources/style/style.css"/> ">
-    <title>Product Page</title>
+    <title>${product.name}</title>
 </head>
 <body>
 

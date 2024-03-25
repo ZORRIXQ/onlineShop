@@ -14,8 +14,6 @@
             <a href="home" class="home-btn">Home</a>
         </header>
         <main>
-            <jsp:useBean id="allProducts" scope="request" class="java.util.ArrayList"/>
-            ${allProducts.size()}
             <c:forEach items="${allProducts}" var="item">
                 <form:form action="product${item.id}" method="POST">
                     <div class="product-card">
