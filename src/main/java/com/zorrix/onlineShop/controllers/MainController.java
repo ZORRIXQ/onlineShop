@@ -11,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class MainController {
+    private final String imageNotFoundPath = "/resources/images/img.png";
     AnnotationConfigApplicationContext context;
 
     @ModelAttribute
@@ -28,7 +30,14 @@ public class MainController {
     public String goHome(Model model){
         model.addAttribute("product", new Product());
 
-        model.addAttribute("allProducts", context.getBean("productGetService", ProductGetService.class).getAllProducts());
+        ArrayList<Product> productList = new ArrayList<>( context.getBean("productGetService", ProductGetService.class).getAllProducts());
+
+        for (Product product : productList){
+            if (!(new File("src/main/webapp" + product.getImagePath()).exists()))
+                product.setImagePath(imageNotFoundPath);
+        }
+
+        model.addAttribute("allProducts", productList);
         context.close();
         return "home";
     }

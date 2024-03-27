@@ -31,7 +31,8 @@ public class Product {
     @Column(name = "imagePath")
     private String imagePath;
 
-    public Product(String name, String description, int price, String imagePath) throws IOException {
+    public Product(String name, String description,
+                   int price, String imagePath) {
         this.name = name;
         this.description = description;
         this.price = price;
